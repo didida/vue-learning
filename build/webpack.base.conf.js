@@ -2,8 +2,6 @@ var path = require('path')
 var config = require('../config')
 var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
-var postcssCssnext = require('postcss-cssnext')()
-var precss = require('precss')()
 
 module.exports = {
   entry: {
@@ -82,10 +80,7 @@ module.exports = {
     formatter: require('eslint-friendly-formatter')
   },
   vue: {
-    loaders: utils.cssLoaders(),
-    postcss: [postcssCssnext, precss],
-    // disable vue-loader autoprefixing.
-    // this is a good idea since cssnext comes with it too.
-    autoprefixer: false
-  }
+    loaders: utils.cssLoaders()
+  },
+  postcss: () => [require('postcss-salad')]
 }
